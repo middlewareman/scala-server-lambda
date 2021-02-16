@@ -5,19 +5,15 @@ import akka.http.scaladsl.model.HttpHeader.ParsingResult
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.unmarshalling.Unmarshal
-import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Keep, Sink, Source}
-import io.github.howardjohn.lambda.ProxyEncoding._
+import io.github.howardjohn.lambda.ProxyEncoding.{ProxyRequest, ProxyResponse}
 import io.github.howardjohn.lambda.{LambdaHandler, ProxyEncoding}
 
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContext, Future}
 
-class AkkaHttpLambdaHandler(route: Route)(
-  implicit system: ActorSystem,
-  materializer: ActorMaterializer,
-  ec: ExecutionContext
-) extends LambdaHandler {
+class AkkaHttpLambdaHandler(route: Route)(implicit as: ActorSystem, ec: ExecutionContext) extends LambdaHandler {
+
   import AkkaHttpLambdaHandler._
 
   override def handleRequest(request: ProxyRequest): ProxyResponse =
@@ -34,7 +30,7 @@ class AkkaHttpLambdaHandler(route: Route)(
   }
 
   private def proxyToAkkaRequest(request: ProxyRequest): HttpRequest =
-    new HttpRequest(
+    HttpRequest(
       method = parseHttpMethod(request.httpMethod),
       uri = Uri(ProxyEncoding.reconstructPath(request)),
       headers = parseRequestHeaders(request.headers.getOrElse(Map.empty)),

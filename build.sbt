@@ -1,5 +1,5 @@
-lazy val Scala212Version = "2.12.10"
-lazy val Scala213Version = "2.13.1"
+lazy val Scala212Version = "2.12.13"
+lazy val Scala213Version = "2.13.4"
 
 def scalacVersionOptions(scalaVersion: String) =
   CrossVersion.partialVersion(scalaVersion) match {
@@ -22,7 +22,7 @@ lazy val root = project
 
 lazy val CirceVersion = "0.13.0"
 lazy val ScalaTestVersion = "3.1.0"
-lazy val Http4sVersion = "0.21.3"
+lazy val Http4sVersion = "0.21.19"
 
 lazy val common = project
   .in(file("common"))
@@ -104,8 +104,8 @@ lazy val akka = project
     scalacOptions ++= scalacVersionOptions(scalaVersion.value),
     libraryDependencies ++= {
       Seq(
-        "com.typesafe.akka" %% "akka-http" % "10.1.10",
-        "com.typesafe.akka" %% "akka-stream" % "2.5.26",
+        "com.typesafe.akka" %% "akka-http" % "10.2.3",
+        "com.typesafe.akka" %% "akka-stream" % "2.6.12",
         "org.scalatest" %% "scalatest" % ScalaTestVersion % "test"
       )
     }
@@ -134,8 +134,8 @@ lazy val exampleAkka = project
     moduleName := "example-akka-http",
     assemblyJarName in assembly := "example-akka-http.jar",
     libraryDependencies ++= Seq(
-      "com.typesafe.akka" %% "akka-http" % "10.1.10",
-      "com.typesafe.akka" %% "akka-stream" % "2.5.26"
+      "com.typesafe.akka" %% "akka-http" % "10.2.3",
+      "com.typesafe.akka" %% "akka-stream" % "2.6.12"
     )
   )
   .dependsOn(akka)
