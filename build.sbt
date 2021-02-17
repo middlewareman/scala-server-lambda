@@ -9,7 +9,7 @@ def scalacVersionOptions(scalaVersion: String) =
 
 lazy val commonSettings = Seq(
   organization := "io.github.howardjohn",
-  scalaVersion := Scala212Version,
+  scalaVersion := Scala213Version,
   crossScalaVersions := Seq(Scala212Version, Scala213Version),
   version := "0.4.0"
 )
