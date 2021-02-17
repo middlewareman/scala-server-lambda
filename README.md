@@ -30,7 +30,7 @@ More thorough examples can be found in the examples directory.
 First, add the dependency:
 
 ```scala
-libraryDependencies += "io.github.howardjohn" %% "http4s-lambda" % "0.3.1"
+libraryDependencies += "io.github.howardjohn" %% "http4s-lambda" % "0.4.1"
 ```
 
 Next, we define a simple `HttpService`. Then, we simply need to define a new class for Lambda.
@@ -55,7 +55,7 @@ Thats it! Make sure any dependencies are initialized in the Route object so they
 First, add the dependency:
 
 ```scala
-libraryDependencies += "io.github.howardjohn" %% "akka-http-lambda" % "0.3.1"
+libraryDependencies += "io.github.howardjohn" %% "akka-http-lambda" % "0.4.1"
 ```
 
 Next, we define a simple `Route`. Then, we simply need to define a new class for Lambda.
@@ -72,7 +72,6 @@ object Route {
 
   // Set up dependencies
   implicit val system: ActorSystem = ActorSystem("example")
-  implicit val materializer: ActorMaterializer = ActorMaterializer()
   implicit val ec = scala.concurrent.ExecutionContext.Implicits.global
 
   // Define the entry point for Lambda
@@ -96,5 +95,6 @@ Finally, an API can be created in API Gateway. [Lambda Proxy integration](https:
 
 | Version      | http4s Version | akka-http Version |
 |--------------|----------------|-------------------|
+| 0.4.1        | 0.21           | 10.2              |
 | 0.4          | 0.20           | 10.1              |
 | 0.3.1        | 0.18           | 10.1              |
